@@ -1,4 +1,4 @@
-import { Button, Container } from "@mui/material";
+import { Button, Container, useMediaQuery } from "@mui/material";
 import {
   Links,
   LiveReload,
@@ -13,7 +13,7 @@ import { withEmotionCache } from "@emotion/react";
 import { unstable_useEnhancedEffect as useEnhancedEffect } from "@mui/material";
 import * as React from "react";
 import ClientStyleContext from "./src/ClientStyleContext";
-import theme from "./src/theme";
+import { createThemeForMode } from "./src/theme";
 
 interface DocumentProps {
   children: React.ReactNode;
@@ -39,6 +39,9 @@ const Document = withEmotionCache(
       clientStyleData.reset();
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+    const theme = createThemeForMode(prefersDarkMode ? "dark" : "light");
 
     return (
       <html lang="en">

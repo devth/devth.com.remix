@@ -6,7 +6,7 @@ import type { EntryContext } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import * as ReactDOMServer from "react-dom/server";
 import createEmotionCache from "./src/createEmotionCache";
-import theme from "./src/theme";
+import { createThemeForMode } from "./src/theme";
 
 export default function handleRequest(
   request: Request,
@@ -16,6 +16,9 @@ export default function handleRequest(
 ) {
   const cache = createEmotionCache();
   const { extractCriticalToChunks } = createEmotionServer(cache);
+
+  const prefersDarkMode = false;
+  const theme = createThemeForMode(prefersDarkMode ? "dark" : "light");
 
   function MuiRemixServer() {
     return (

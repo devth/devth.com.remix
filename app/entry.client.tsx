@@ -6,7 +6,8 @@ import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import ClientStyleContext from "./src/ClientStyleContext";
 import createEmotionCache from "./src/createEmotionCache";
-import theme from "./src/theme";
+import { createThemeForMode } from "./src/theme";
+import { useMediaQuery } from "@mui/material";
 
 interface ClientCacheProviderProps {
   children: React.ReactNode;
@@ -30,18 +31,24 @@ function ClientCacheProvider({ children }: ClientCacheProviderProps) {
   );
 }
 
+const DarkModeAwareHydrate = () => {
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const theme = createThemeForMode(prefersDarkMode ? "dark" : "light");
+
+  return (
+    <ClientCacheProvider>
+      <ThemeProvider theme={theme}>
+        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+        <CssBaseline />
+        <RemixBrowser />
+      </ThemeProvider>
+    </ClientCacheProvider>
+  );
+};
+
 const hydrate = () => {
   React.startTransition(() => {
-    ReactDOM.hydrateRoot(
-      document,
-      <ClientCacheProvider>
-        <ThemeProvider theme={theme}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          <RemixBrowser />
-        </ThemeProvider>
-      </ClientCacheProvider>
-    );
+    ReactDOM.hydrateRoot(document, <DarkModeAwareHydrate />);
   });
 };
 
