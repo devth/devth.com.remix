@@ -1,3 +1,4 @@
+import { Typography } from "@mui/material";
 import type { V2_MetaFunction } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 
@@ -11,7 +12,7 @@ export const meta: V2_MetaFunction = () => {
 export default function Index() {
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1>Welcome to Remix</h1>
+      <Typography variant="h2">Welcome to Remix</Typography>
       <ul>
         <li>
           <Link to="/about">About </Link>
