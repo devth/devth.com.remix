@@ -22,6 +22,11 @@ export default function App() {
         <Links />
       </head>
       <body>
+        <Container>
+          <Button variant="contained" color="primary">
+            Hello
+          </Button>
+        </Container>
         <AnimatePresence mode="wait" initial={false}>
           <motion.main
             key={useLocation().pathname}
@@ -31,9 +36,6 @@ export default function App() {
             transition={{ duration: 0.1 }}
           >
             <Container>{outlet}</Container>
-            <Button variant="contained" color="primary">
-              Hello
-            </Button>
           </motion.main>
         </AnimatePresence>
         <ScrollRestoration />
