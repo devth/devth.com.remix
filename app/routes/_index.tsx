@@ -1,6 +1,5 @@
-import { Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import type { V2_MetaFunction } from "@remix-run/node";
-import { Link } from "@remix-run/react";
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -11,13 +10,26 @@ export const meta: V2_MetaFunction = () => {
 
 export default function Index() {
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <Typography variant="h2">Welcome to Remix</Typography>
-      <ul>
-        <li>
-          <Link to="/about">About </Link>
-        </li>
-      </ul>
-    </div>
+    <Box style={{ overflowX: "hidden" }}>
+      <Container maxWidth="lg">
+        <Typography sx={{ fontSize: 100 }} variant="h1">
+          devth is Trevor Hartman
+        </Typography>
+        <Typography variant="h2">
+          a software engineer working remotely from Montana
+        </Typography>
+      </Container>
+      <Box
+        sx={{
+          width: "110%",
+          marginLeft: "-5%",
+          backgroundColor: "turquoise",
+          mt: 10,
+          height: 700,
+          transformOrigin: "top left",
+          transform: "rotate(-3deg)",
+        }}
+      />
+    </Box>
   );
 }

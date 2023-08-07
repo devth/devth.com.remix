@@ -1,5 +1,12 @@
-import { Button, Container, useMediaQuery } from "@mui/material";
+import { withEmotionCache } from "@emotion/react";
 import {
+  Button,
+  Container,
+  unstable_useEnhancedEffect as useEnhancedEffect,
+  useMediaQuery,
+} from "@mui/material";
+import {
+  Link,
   Links,
   LiveReload,
   Meta,
@@ -9,11 +16,10 @@ import {
   useOutlet,
 } from "@remix-run/react";
 import { AnimatePresence, motion } from "framer-motion";
-import { withEmotionCache } from "@emotion/react";
-import { unstable_useEnhancedEffect as useEnhancedEffect } from "@mui/material";
 import * as React from "react";
 import ClientStyleContext from "./src/ClientStyleContext";
 import { createThemeForMode } from "./src/theme";
+import { Logo } from "./components/Logo";
 
 interface DocumentProps {
   children: React.ReactNode;
@@ -77,20 +83,24 @@ export default function App() {
 
   return (
     <Document>
-      <Container>
-        <Button variant="contained" color="primary">
-          Hello
+      <Container sx={{ mb: 2 }}>
+        <Logo />
+        <Button component={Link} to="/" color="primary">
+          Home
+        </Button>
+        <Button component={Link} to="/about" color="primary">
+          About
         </Button>
       </Container>
       <AnimatePresence mode="wait" initial={false}>
         <motion.main
           key={useLocation().pathname}
-          initial={{ y: "+20%", opacity: 0 }}
-          animate={{ y: "0", opacity: 1 }}
-          exit={{ opacity: 0, y: "-20%" }}
-          transition={{ duration: 0.1 }}
+          initial={{ x: "-100px", y: 0, opacity: 0 }}
+          animate={{ x: 0, y: 0, opacity: 1 }}
+          exit={{ x: "100px", y: 0, opacity: 0, transition: { duration: 0.1 } }}
+          transition={{ duration: 0.2 }}
         >
-          <Container>{outlet}</Container>
+          {outlet}
         </motion.main>
       </AnimatePresence>
       <ScrollRestoration />
