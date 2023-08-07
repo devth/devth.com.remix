@@ -1,12 +1,15 @@
-> **Warning**  
-> The `@remix-run/vercel` runtime adapter has been deprecated in favor of out of
-> the box Vercel functionality and will be removed in Remix v2.  
-> This means you don't have to use the Vercel template & can just use the Remix
-> template instead.
+# devth.com
 
-# Welcome to Remix!
+## Requirements
 
-- [Remix Docs](https://remix.run/docs)
+- Write posts in markdown
+- Ability to render React components in posts
+- Animated page transitions
+- Server side rendering (or static export)
+- Shift-K to nav to any page
+- Super fast
+- Default branch deploys to production automatically
+- Respect system dark / light mode
 
 ## Deployment
 
